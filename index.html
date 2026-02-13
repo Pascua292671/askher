@@ -2,91 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Question for You 💌</title>
+  <title>Coffee Date Invite ☕💖</title>
 
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffd6e8, #ffeaa7);
-      height: 100vh;
+      background: #ffeef3;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0;
+      height: 100vh;
     }
 
+    /* 💕 HEART BACKGROUND */
+    .heart {
+      position: fixed;
+      color: #ff6b9d;
+      animation: float 6s linear infinite;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(100vh);
+      }
+      to {
+        transform: translateY(-10vh);
+      }
+    }
+
+    /* CARD */
     .card {
       background: white;
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
+      width: 340px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      max-width: 350px;
-      width: 100%;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 10;
     }
 
-    h2 {
+    h1 {
+      font-size: 18px;
       margin-bottom: 25px;
     }
 
     button {
-      padding: 12px 25px;
-      margin: 10px;
+      padding: 12px 22px;
+      margin: 8px;
+      border-radius: 12px;
       border: none;
-      border-radius: 10px;
+      font-size: 15px;
       cursor: pointer;
-      font-size: 16px;
       transition: 0.2s;
     }
 
     .yes {
-      background: #ff7675;
+      background: #4caf50;
       color: white;
     }
 
     .no {
-      background: #55efc4;
+      background: #ff6b6b;
+      color: white;
+      position: relative;
     }
 
-    button:hover {
-      transform: scale(1.05);
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="card" id="card">
-    <h2>Do you have a boyfriend? 🥺</h2>
-
-    <button class="yes" onclick="hasBoyfriend()">Yes</button>
-    <button class="no" onclick="noBoyfriend()">No</button>
+  <!-- PAGE 1 -->
+  <div class="card" id="page1">
+    <h1>May boyfriend ka ba? 😳</h1>
+    <button class="yes" onclick="sad()">Yes</button>
+    <button class="no" onclick="nextPage()">No</button>
   </div>
 
+  <!-- PAGE 2 -->
+  <div class="card hidden" id="page2">
+    <h1>Papayag ka ba na ayain kita mag coffee date bukas? ☕🥺</h1>
+    <button class="yes" onclick="yesAnswer()">Yes</button>
+    <button class="no" id="runBtn" onmouseover="moveButton()">No</button>
+  </div>
 
   <script>
-    function hasBoyfriend() {
-      alert("Aww okay 😢💔 I'll still cheer for your happiness!");
+    /* 💕 generate floating hearts */
+    for (let i = 0; i < 40; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 5 + "s";
+      heart.style.fontSize = 10 + Math.random() * 20 + "px";
+      document.body.appendChild(heart);
     }
 
-    function noBoyfriend() {
-      const card = document.getElementById("card");
-
-      card.innerHTML = `
-        <h2>Papayag ka ba na ayain kita mag coffee date bukas? ☕😊</h2>
-        <button class="no" onclick="dateYes()">Yes 💖</button>
-        <button class="yes" onclick="dateNo()">No 😭</button>
-      `;
+    /* page functions */
+    function sad() {
+      alert("Aww 😢 sayang naman 💔");
     }
 
-    function dateYes() {
-      alert("Yayyy!! See you tomorrow! ☕✨ I'll plan something nice for us 💕");
+    function nextPage() {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
     }
 
-    function dateNo() {
-      alert("Okay lang 😅 maybe next time! Still friends ha 😊");
+    function yesAnswer() {
+      alert("Yaaayyy see you tomorrow!! ☕💖🥰");
+    }
+
+    /* 😂 moving NO button */
+    function moveButton() {
+      const btn = document.getElementById("runBtn");
+
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+
+      btn.style.transform = `translate(${x}px, ${y}px)`;
     }
   </script>
 
 </body>
 </html>
+
